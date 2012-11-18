@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title></title>
+<!--[if IE]>
+  <script type="text/javascript" src="excanvas.js"></script>
+<![endif]-->
+</head>
+<body>
+<div style="margin-left:30px;">
+<canvas id="myCanvasTag1" width="400" height="300" style="border: 1px black solid">
+</canvas>
+<canvas id="myCanvasTag2" width="400" height="300" style="border: 1px black solid">
+</canvas>
+<br />
+<canvas id="myCanvasTag3" width="400" height="300" style="border: 1px black solid">
+</canvas>
+<canvas id="myCanvasTag4" width="400" height="300" style="border: 1px black solid">
+</canvas>
+<br />
+</div>
+<script>
+	var mycontext1=document.getElementById("myCanvasTag1").getContext('2d');
+	var mycontext2=document.getElementById("myCanvasTag2").getContext('2d');
+    var mycontext3=document.getElementById("myCanvasTag3").getContext('2d');
+    var mycontext4=document.getElementById("myCanvasTag4").getContext('2d'); 
+	var uarmlen = 30;
+	var larmlen = 30;
+	var handlen = 5;
+	var theta1=0;
+	var theta2=0;
+	var theta3=0;
+	var theta1min = 0;
+	var theta1max = 45;
+	var lx1;
+	var ly1;
+	var lx2;
+	var ly2;
+	var lx3;
+	var ly3;
+	var lx4;
+	var ly4;
+	var lx5;
+	var ly5;
+	var lx6;
+	var ly6;
+	var n=1;	
+	
+	function draw1(){
+		mycontext1.clearRect(0, 0, document.getElementById("myCanvasTag1").width, document.getElementById("myCanvasTag1").height);
+		if (theta1>theta1max){
+			theta1=theta1max;
+			n=0;
+		}
+		if(theta1<theta1min){
+			theta1=theta1min;
+			n=1;
+		}
+		
+		if (n==1){
+			theta1=theta1+5;
+			theta2=theta2-10;
+			theta3=theta3+15;
+		}
+		else{
+			theta1=theta1-5;
+			theta2=theta2+10;
+			theta3=theta3-15;
+		}
+		
+		lx1=170-30*Math.sin(theta1*2*Math.PI/360);
+		ly1=100+30*Math.cos(theta1*2*Math.PI/360);
+		lx2=lx1-30*Math.sin(theta2*2*Math.PI/360);
+		ly2=ly1+30*Math.cos(theta2*2*Math.PI/360);
+		lx3=lx2-10*Math.sin(theta3*2*Math.PI/360);
+		ly3=ly2+10*Math.cos(theta3*2*Math.PI/360);
+		
+		lx4=230-30*Math.sin(theta1*2*Math.PI/360);
+		ly4=100+30*Math.cos(theta1*2*Math.PI/360);
+		lx5=lx4-30*Math.sin(theta2*2*Math.PI/360);
+		ly5=ly4+30*Math.cos(theta2*2*Math.PI/360);
+		lx6=lx5-10*Math.sin(theta3*2*Math.PI/360);
+		ly6=ly5+10*Math.cos(theta3*2*Math.PI/360);
+		
+		//still part
+		mycontext1.LineWidth=10.0;           
+		mycontext1.strokeStyle = "#0000FF";
+		mycontext1.beginPath();
+		mycontext1.arc(200,45,15,0,2*Math.PI);//head
+		mycontext1.stroke();
+		mycontext1.strokeStyle = "#FF0000";
+		mycontext1.beginPath();
+		mycontext1.moveTo(200,60);//body
+		mycontext1.lineTo(200,175);
+		mycontext1.moveTo(175,100);//shoulder
+		mycontext1.lineTo(225,100);
+		mycontext1.stroke();
+		mycontext1.strokeStyle = "#0000FF";
+		mycontext1.beginPath();
+		mycontext1.arc(170,100,5,0,2*Math.PI);//l shoulder
+		mycontext1.stroke();
+		mycontext1.beginPath();
+		mycontext1.arc(230,100,5,0,2*Math.PI);//r shoulder
+		mycontext1.stroke();
+		mycontext1.beginPath();
+		mycontext1.arc(200,185,8,0,2*Math.PI);
+		mycontext1.stroke();
+		mycontext1.strokeStyle = "#FF0000";
+		mycontext1.beginPath();
+		mycontext1.moveTo(200,185);//luleg
+		mycontext1.lineTo(165,220);
+		mycontext1.moveTo(200,185);//ruleg
+		mycontext1.lineTo(235,220);
+		mycontext1.stroke();
+		mycontext1.strokeStyle = "#0000FF";
+		mycontext1.beginPath();
+		mycontext1.arc(165,220,5,0,2*Math.PI);//l knee
+		mycontext1.stroke();
+		mycontext1.beginPath();
+		mycontext1.arc(235,220,5,0,2*Math.PI);//r knee
+		mycontext1.stroke();
+		mycontext1.strokeStyle = "#FF0000";
+		mycontext1.beginPath();
+		mycontext1.moveTo(165,220);//llleg
+		mycontext1.lineTo(165,270);
+		mycontext1.moveTo(235,220);//rlleg
+		mycontext1.lineTo(235,270);
+		mycontext1.stroke();
+		
+		//motion part l
+		mycontext1.strokeStyle = "#FF0000";
+		mycontext1.beginPath();
+		mycontext1.moveTo(170,100);
+		mycontext1.lineTo(lx1,ly1);//luarm
+		mycontext1.stroke();
+		mycontext1.strokeStyle = "#0000FF";
+		mycontext1.beginPath();
+		mycontext1.arc(lx1,ly1,5,0,2*Math.PI);//lelbow
+		mycontext1.stroke();
+		mycontext1.strokeStyle = "#FF0000";
+		mycontext1.beginPath();
+		mycontext1.moveTo(lx1,ly1);
+		mycontext1.lineTo(lx2,ly2);//llarm
+		mycontext1.stroke();
+		mycontext1.strokeStyle = "#0000FF";
+		mycontext1.beginPath();
+		mycontext1.arc(lx2,ly2,5,0,2*Math.PI);//lwrist
+		mycontext1.stroke();
+		mycontext1.strokeStyle = "#FF0000";
+		mycontext1.beginPath();
+		mycontext1.moveTo(lx2,ly2);
+		mycontext1.lineTo(lx3,ly3);//lhand
+		mycontext1.stroke();
+		
+		//motion part r
+		mycontext1.strokeStyle = "#FF0000";
+		mycontext1.beginPath();
+		mycontext1.moveTo(230,100);
+		mycontext1.lineTo(lx4,ly4);//ruarm
+		mycontext1.stroke();
+		mycontext1.strokeStyle = "#0000FF";
+		mycontext1.beginPath();
+		mycontext1.arc(lx4,ly4,5,0,2*Math.PI);//relbow
+		mycontext1.stroke();
+		mycontext1.strokeStyle = "#FF0000";
+		mycontext1.beginPath();
+		mycontext1.moveTo(lx4,ly4);
+		mycontext1.lineTo(lx5,ly5);//rlarm
+		mycontext1.stroke();
+		mycontext1.strokeStyle = "#0000FF";
+		mycontext1.beginPath();
+		mycontext1.arc(lx5,ly5,5,0,2*Math.PI);//rwrist
+		mycontext1.stroke();
+		mycontext1.strokeStyle = "#FF0000";
+		mycontext1.beginPath();
+		mycontext1.moveTo(lx5,ly5);
+		mycontext1.lineTo(lx6,ly6);//rhand
+		mycontext1.stroke();
+		
+		mycontext1.restore();
+	}
+	setInterval(draw1, 1000);
+  /*function draw2() {
+    
+       
+    
+    // gradient 2   
+    var mygradient2=mycontext2.createLinearGradient(30,30,90,90);           
+    mygradient2.addColorStop(1,"#FF0000");
+    mygradient2.addColorStop(0,"#00FF00");
+    mycontext2.fillStyle=mygradient2;
+    mycontext2.fillRect(0,0,100,100);
+
+    var mygradient3=mycontext3.createLinearGradient(30,30,90,90);           
+    mygradient3.addColorStop(0,"#0000FF");
+    mygradient3.addColorStop(.5,"#00FFDD");
+    mycontext3.fillStyle=mygradient3;
+    mycontext3.fillRect(0,0,100,100);
+
+    var mygradient4=mycontext4.createLinearGradient(30,30,90,90);           
+    mygradient4.addColorStop(0,"#DD33CC");
+    mygradient4.addColorStop(1,"#EEEEEE");
+    mycontext4.fillStyle=mygradient4;
+    mycontext4.fillRect(0,0,100,100);
+  }*/
+</script>
+</body>
+</html>
